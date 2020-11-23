@@ -266,12 +266,12 @@ static NSString *const kPresentationSize         = @"presentationSize";
 
 - (void)initializePlayer {
     _asset = [AVURLAsset URLAssetWithURL:self.assetURL options:self.requestHeader];
-//    _playerItem = [AVPlayerItem playerItemWithAsset:_asset];
-//    _player = [AVPlayer playerWithPlayerItem:_playerItem];
-    
-    VIResourceLoaderManager *resourceLoaderManager = [VIResourceLoaderManager new];
-    _playerItem = [resourceLoaderManager playerItemWithURL:self.assetURL];
+    _playerItem = [AVPlayerItem playerItemWithAsset:_asset];
     _player = [AVPlayer playerWithPlayerItem:_playerItem];
+    
+//    VIResourceLoaderManager *resourceLoaderManager = [VIResourceLoaderManager new];
+//    _playerItem = [resourceLoaderManager playerItemWithURL:self.assetURL];
+//    _player = [AVPlayer playerWithPlayerItem:_playerItem];
     _imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:_asset];
 
     [self enableAudioTracks:YES inPlayerItem:_playerItem];
