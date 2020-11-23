@@ -271,7 +271,7 @@ static NSString *const kPresentationSize         = @"presentationSize";
     
     VIResourceLoaderManager *resourceLoaderManager = [VIResourceLoaderManager new];
     _playerItem = [resourceLoaderManager playerItemWithURL:self.assetURL];
-    _player = [AVPlayer playerWithPlayerItem:playerItem];
+    _player = [AVPlayer playerWithPlayerItem:_playerItem];
     _imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:_asset];
 
     [self enableAudioTracks:YES inPlayerItem:_playerItem];
