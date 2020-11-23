@@ -20,6 +20,7 @@
   },
   "requires_arc": true,
   "static_framework": true,
+  "default_subspecs": "Core",
   "subspecs": [
     {
       "name": "Core",
@@ -49,6 +50,9 @@
       "dependencies": {
         "ZFPlayer/Core": [
 
+        ],
+        "VIMediaCache": [
+
         ]
       }
     },
@@ -58,6 +62,9 @@
       "public_header_files": "ZFPlayer/Classes/ijkplayer/*.h",
       "dependencies": {
         "ZFPlayer/Core": [
+
+        ],
+        "IJKMediaFramework": [
 
         ]
       }

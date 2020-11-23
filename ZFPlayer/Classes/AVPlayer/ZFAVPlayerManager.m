@@ -34,6 +34,7 @@
 #import "ZFReachabilityManager.h"
 #endif
 
+@import VIMediaCache;
 
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored"-Wdeprecated-declarations"

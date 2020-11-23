@@ -37,6 +37,7 @@ Pod::Spec.new do |s|
         avPlayer.source_files = 'ZFPlayer/Classes/AVPlayer/**/*.{h,m}'
         avPlayer.public_header_files = 'ZFPlayer/Classes/AVPlayer/**/*.h'
         avPlayer.dependency 'ZFPlayer/Core'
+        avPlayer.dependency 'VIMediaCache'
     end
     
     s.subspec 'ijkplayer' do |ijkplayer|
