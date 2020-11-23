@@ -163,7 +163,7 @@ static NSString *const kPresentationSize         = @"presentationSize";
     self->_isPlaying = NO;
     self.playState = ZFPlayerPlayStatePaused;
     [_playerItem cancelPendingSeeks];
-    [_asset cancelLoading];
+//    [_asset cancelLoading];
 }
 
 - (void)stop {
@@ -172,7 +172,7 @@ static NSString *const kPresentationSize         = @"presentationSize";
     self.playState = ZFPlayerPlayStatePlayStopped;
     if (self.player.rate != 0) [self.player pause];
     [_playerItem cancelPendingSeeks];
-    [_asset cancelLoading];
+//    [_asset cancelLoading];
     [self.player removeTimeObserver:_timeObserver];
     [self.player replaceCurrentItemWithPlayerItem:nil];
     self.presentationSize = CGSizeZero;
@@ -266,8 +266,12 @@ static NSString *const kPresentationSize         = @"presentationSize";
 
 - (void)initializePlayer {
     _asset = [AVURLAsset URLAssetWithURL:self.assetURL options:self.requestHeader];
-    _playerItem = [AVPlayerItem playerItemWithAsset:_asset];
-    _player = [AVPlayer playerWithPlayerItem:_playerItem];
+//    _playerItem = [AVPlayerItem playerItemWithAsset:_asset];
+//    _player = [AVPlayer playerWithPlayerItem:_playerItem];
+    
+    VIResourceLoaderManager *resourceLoaderManager = [VIResourceLoaderManager new];
+    _playerItem = [resourceLoaderManager playerItemWithURL:self.assetURL];
+    _player = [AVPlayer playerWithPlayerItem:playerItem];
     _imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:_asset];
 
     [self enableAudioTracks:YES inPlayerItem:_playerItem];
