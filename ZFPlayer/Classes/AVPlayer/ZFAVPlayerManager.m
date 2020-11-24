@@ -91,6 +91,7 @@ static NSString *const kPresentationSize         = @"presentationSize";
 @property (nonatomic, assign) BOOL isBuffering;
 @property (nonatomic, assign) BOOL isReadyToPlay;
 @property (nonatomic, strong) AVAssetImageGenerator *imageGenerator;
+@property (nonatomic, strong) VIResourceLoaderManager *resourceLoaderManager;
 
 @end
 
@@ -127,6 +128,7 @@ static NSString *const kPresentationSize         = @"presentationSize";
     if (self) {
         _scalingMode = ZFPlayerScalingModeAspectFit;
         _shouldAutoPlay = YES;
+        _resourceLoaderManager = [VIResourceLoaderManager new];
     }
     return self;
 }
@@ -266,12 +268,11 @@ static NSString *const kPresentationSize         = @"presentationSize";
 
 - (void)initializePlayer {
     _asset = [AVURLAsset URLAssetWithURL:self.assetURL options:self.requestHeader];
-    _playerItem = [AVPlayerItem playerItemWithAsset:_asset];
-    _player = [AVPlayer playerWithPlayerItem:_playerItem];
-    
-//    VIResourceLoaderManager *resourceLoaderManager = [VIResourceLoaderManager new];
-//    _playerItem = [resourceLoaderManager playerItemWithURL:self.assetURL];
+//    _playerItem = [AVPlayerItem playerItemWithAsset:_asset];
 //    _player = [AVPlayer playerWithPlayerItem:_playerItem];
+    
+    _playerItem = [_resourceLoaderManager playerItemWithURL:self.assetURL];
+    _player = [AVPlayer playerWithPlayerItem:_playerItem];
     _imageGenerator = [AVAssetImageGenerator assetImageGeneratorWithAsset:_asset];
 
     [self enableAudioTracks:YES inPlayerItem:_playerItem];
@@ -285,7 +286,7 @@ static NSString *const kPresentationSize         = @"presentationSize";
         _playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = NO;
     }
     if (@available(iOS 10.0, *)) {
-        _playerItem.preferredForwardBufferDuration = 5;
+        _playerItem.preferredForwardBufferDuration = 10;
     }
     [self itemObserving];
 }
