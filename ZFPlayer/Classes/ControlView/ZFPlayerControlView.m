@@ -243,7 +243,7 @@
 }
 
 /// 音量改变的通知
-- (void)volumeChanged:(NSNotification *)notification {    
+- (void)volumeChanged:(NSNotification *)notification {
     NSDictionary *userInfo = notification.userInfo;
     NSString *reasonstr = userInfo[@"AVSystemController_AudioVolumeChangeReasonNotificationParameter"];
     if ([reasonstr isEqualToString:@"ExplicitVolumeChange"]) {
@@ -437,6 +437,7 @@
 /// 准备播放
 - (void)videoPlayer:(ZFPlayerController *)videoPlayer prepareToPlay:(NSURL *)assetURL {
     [self hideControlViewWithAnimated:NO];
+    self.portraitControlView.soundBtn.selected = videoPlayer.currentPlayerManager.muted;
 }
 
 /// 播放状态改变

@@ -40,7 +40,7 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 /// 播放或暂停按钮
 @property (nonatomic, strong) UIButton *playOrPauseBtn;
-/// 播放的当前时间 
+/// 播放的当前时间
 @property (nonatomic, strong) UILabel *currentTimeLabel;
 /// 滑杆
 @property (nonatomic, strong) ZFSliderView *slider;
@@ -48,6 +48,8 @@
 @property (nonatomic, strong) UILabel *totalTimeLabel;
 /// 全屏按钮
 @property (nonatomic, strong) UIButton *fullScreenBtn;
+// sound
+@property (nonatomic, strong) UIButton *soundBtn;
 
 @property (nonatomic, assign) BOOL isShow;
 
@@ -62,6 +64,7 @@
         [self addSubview:self.bottomToolView];
         [self addSubview:self.playOrPauseBtn];
         [self.topToolView addSubview:self.titleLabel];
+        [self.bottomToolView addSubview:self.soundBtn];
         [self.bottomToolView addSubview:self.currentTimeLabel];
         [self.bottomToolView addSubview:self.slider];
         [self.bottomToolView addSubview:self.totalTimeLabel];
@@ -112,11 +115,18 @@
     self.playOrPauseBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
     self.playOrPauseBtn.center = self.center;
     
+    min_w = 28;
+    min_h = min_w;
     min_x = min_margin;
+    min_y = 0;
+    self.soundBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    
+    min_x = self.soundBtn.zf_right + 4;
     min_w = 62;
     min_h = 28;
     min_y = (self.bottomToolView.zf_height - min_h)/2;
     self.currentTimeLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
+    self.soundBtn.zf_centerY = self.currentTimeLabel.zf_centerY;
     
     min_w = 28;
     min_h = min_w;
@@ -153,6 +163,7 @@
 - (void)makeSubViewsAction {
     [self.playOrPauseBtn addTarget:self action:@selector(playPauseButtonClickAction:) forControlEvents:UIControlEventTouchUpInside];
     [self.fullScreenBtn addTarget:self action:@selector(fullScreenButtonClickAction:) forControlEvents:UIControlEventTouchUpInside];
+    [self.soundBtn addTarget:self action:@selector(soundModeClickAction:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - action
@@ -163,6 +174,11 @@
 
 - (void)fullScreenButtonClickAction:(UIButton *)sender {
     [self.player enterFullScreen:YES animated:YES];
+}
+
+- (void)soundModeClickAction:(UIButton *)sender {
+    self.soundBtn.selected = !self.soundBtn.isSelected;
+    [self.player.currentPlayerManager setMuted:self.soundBtn.selected];
 }
 
 /// 根据当前播放状态取反
@@ -219,7 +235,7 @@
     self.currentTimeLabel.text = currentTimeString;
 }
 
-#pragma mark - public method 
+#pragma mark - public method
 
 /** 重置ControlView */
 - (void)resetControlView {
@@ -382,6 +398,15 @@
         [_fullScreenBtn setImage:ZFPlayer_Image(@"ZFPlayer_fullscreen") forState:UIControlStateNormal];
     }
     return _fullScreenBtn;
+}
+
+- (UIButton *)soundBtn {
+    if (!_soundBtn) {
+        _soundBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_soundBtn setImage:ZFPlayer_Image(@"ZFPlayer_speaker_on") forState:UIControlStateNormal];
+        [_soundBtn setImage:ZFPlayer_Image(@"ZFPlayer_speaker_mute") forState:UIControlStateSelected];
+    }
+    return _soundBtn;
 }
 
 @end

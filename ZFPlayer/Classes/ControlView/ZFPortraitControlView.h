@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// 播放或暂停按钮
 @property (nonatomic, strong, readonly) UIButton *playOrPauseBtn;
 
-/// 播放的当前时间 
+/// 播放的当前时间
 @property (nonatomic, strong, readonly) UILabel *currentTimeLabel;
 
 /// 滑杆
@@ -57,6 +57,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// 全屏按钮
 @property (nonatomic, strong, readonly) UIButton *fullScreenBtn;
+
+// sound button
+@property (nonatomic, strong, readonly) UIButton *soundBtn;
 
 /// 播放器
 @property (nonatomic, weak) ZFPlayerController *player;
