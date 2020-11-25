@@ -286,7 +286,7 @@ static NSString *const kPresentationSize         = @"presentationSize";
         _playerItem.canUseNetworkResourcesForLiveStreamingWhilePaused = NO;
     }
     if (@available(iOS 10.0, *)) {
-        _playerItem.preferredForwardBufferDuration = 10;
+        _playerItem.preferredForwardBufferDuration = 3;
     }
     [self itemObserving];
 }
