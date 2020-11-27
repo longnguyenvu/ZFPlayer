@@ -32,7 +32,7 @@
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.backgroundColor = [UIColor blackColor];
+        self.backgroundColor = [UIColor clearColor];
         [self addSubview:self.coverImageView];
     }
     return self;
@@ -96,6 +96,7 @@
 - (UIImageView *)coverImageView {
     if (!_coverImageView) {
         _coverImageView = [[UIImageView alloc] init];
+        _coverImageView.backgroundColor = [UIColor clearColor];
         _coverImageView.userInteractionEnabled = YES;
         _coverImageView.clipsToBounds = YES;
         _coverImageView.contentMode = UIViewContentModeScaleAspectFit;
