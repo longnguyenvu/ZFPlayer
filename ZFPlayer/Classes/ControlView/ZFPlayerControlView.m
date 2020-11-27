@@ -114,7 +114,7 @@
     self.floatControlView.frame = self.bounds;
     self.coverImageView.frame = self.bounds;
     self.bgImgView.frame = self.bounds;
-    self.effectView.frame = self.bounds;
+    self.effectView.frame = CGRectZero;
     
     min_w = 80;
     min_h = 80;
@@ -476,7 +476,7 @@
             self.effectView.hidden = NO;
         } else {
             self.effectView.hidden = YES;
-            self.player.currentPlayerManager.view.backgroundColor = [UIColor blackColor];
+//            self.player.currentPlayerManager.view.backgroundColor = [UIColor blackColor];
         }
     }
     if (state == ZFPlayerLoadStateStalled && videoPlayer.currentPlayerManager.isPlaying && !self.prepareShowLoading) {
