@@ -63,8 +63,8 @@
         [self addSubview:self.topToolView];
         [self addSubview:self.bottomToolView];
         [self addSubview:self.playOrPauseBtn];
+        [self addSubview:self.soundBtn];
         [self.topToolView addSubview:self.titleLabel];
-        [self.bottomToolView addSubview:self.soundBtn];
         [self.bottomToolView addSubview:self.currentTimeLabel];
         [self.bottomToolView addSubview:self.slider];
         [self.bottomToolView addSubview:self.totalTimeLabel];
@@ -116,9 +116,9 @@
     self.playOrPauseBtn.center = self.center;
     
     min_w = 28;
-    min_h = min_w;
+    min_h = 40;
     min_x = min_margin;
-    min_y = 0;
+    min_y = self.bottomToolView.zf_top;
     self.soundBtn.frame = CGRectMake(min_x, min_y, min_w, min_h);
     
     min_x = self.soundBtn.zf_right + 4;
@@ -126,7 +126,6 @@
     min_h = 28;
     min_y = (self.bottomToolView.zf_height - min_h)/2;
     self.currentTimeLabel.frame = CGRectMake(min_x, min_y, min_w, min_h);
-    self.soundBtn.zf_centerY = self.currentTimeLabel.zf_centerY;
     
     min_w = 28;
     min_h = min_w;
